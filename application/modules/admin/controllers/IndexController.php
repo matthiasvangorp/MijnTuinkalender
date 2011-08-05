@@ -78,6 +78,7 @@ class Admin_IndexController extends Zend_Controller_Action
     		$plantID = $this->_getParam('plantID', 0);
     		if ($plantID >0){
     			$planten = new Application_Model_DbTable_Planten();
+    			 $this->view->planten = $planten->getPlant($plantID);
     			$form->populate($planten->getPlant($plantID));
     		}
     	}

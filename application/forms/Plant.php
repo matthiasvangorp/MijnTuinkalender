@@ -59,7 +59,6 @@ class Application_Form_Plant extends Zend_Form
         ->addValidator('NotEmpty');
         $afbeelding = new Zend_Form_Element_File('afbeelding');
         $basis = Zend_Controller_Front::getInstance()->getBaseUrl();
-        echo "base path: $basis <br/>";
         //die();
         $afbeelding->setLabel('Afbeelding')
        			 ->setDestination('images/');
