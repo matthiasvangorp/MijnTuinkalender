@@ -2,25 +2,22 @@
 class Application_Form_Plant extends Zend_Form
 {
 	
-	
-    public function init()
-    {
-    	$this->addElementPrefixPath('App', '/images/');
-    	$this->setAttrib('enctype', 'multipart/form-data');
-    	
-    	$allowed_tags = array(
-		'a' =>	array('href', 'title'),
-		'strong',
-		'img'	=>	array('src', 'alt'),
-		'ul',
-		'ol',
-		'li',
-		'em',
-		'u',
-		'strike');
-	    	
-    	
-        $this->setName('plant');
+	public function __construct($options = null){
+		parent::__construct($options);
+		$this->setName('plant');
+		$this->setAttrib('enctype', 'multipart/form-data');
+		
+		$allowed_tags = array(
+			'a' =>	array('href', 'title'),
+			'strong',
+			'img'	=>	array('src', 'alt'),
+			'ul',
+			'ol',
+			'li',
+			'em',
+			'u',
+			'strike');
+		
         $plantID = new Zend_Form_Element_Hidden('plantID');
         $plantID->addFilter('Int');
         $naam = new Zend_Form_Element_Text('naam');
@@ -59,13 +56,20 @@ class Application_Form_Plant extends Zend_Form
               ->setRequired(true)
               ->addFilter('StringTrim')
               ->setAttrib('class', 'ckeditor')
-              ->addValidator('NotEmpty');
+        ->addValidator('NotEmpty');
         $afbeelding = new Zend_Form_Element_File('afbeelding');
-        $afbeelding->setLabel('Afbeelding');
+        $basis = Zend_Controller_Front::getInstance()->getBaseUrl();
+        echo "base path: $basis <br/>";
+        //die();
+        $afbeelding->setLabel('Afbeelding')
+       			 ->setDestination('images/');
         
         
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
 		
         $this->addElements(array($plantID, $naam, $beschrijving, $kiemingsduur,$teeltduur, $begieten, $opbrengst, $afbeelding, $submit)); }
-}
+		
+	}
+	
+	
