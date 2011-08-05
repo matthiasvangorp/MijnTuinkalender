@@ -9,13 +9,11 @@ defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 // Ensure library/ is on include_path
+
 set_include_path(implode(PATH_SEPARATOR, array(
-    realpath(APPLICATION_PATH . '/../library'),
+    realpath(APPLICATION_PATH . '/../library'), realpath('/Applications/MAMP/svn/zendframework/trunk/library'),
     get_include_path(),
 )));
-$Zend_Loader_Autoloader = Zend_Loader_Autoloader::getInstance();
-$Zend_Loader_Autoloader->setFallbackAutoloader(true);
-$Zend_Loader_Autoloader->registerNamespace(array(ÔClass_Õ));
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
@@ -27,4 +25,3 @@ $application = new Zend_Application(
 );
 $application->bootstrap()
             ->run();
-            
