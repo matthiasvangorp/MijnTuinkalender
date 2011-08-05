@@ -1,0 +1,14 @@
+<?php
+$this->title = "Plant verwijderen";
+$this->headTitle($this->title);
+?>
+<p>
+Ben je zeker dat je de plant '<?php echo $this->escape($this->planten['naam']);?>' wil verwijderen? 
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete'));?>" method="post">
+	<div>
+		<input type="hidden" name="plantID" value="<?php echo $this->planten['plantID'];?>" />
+		<input type="submit" name="del" value="yes"/>
+		<input type="submit" name="del" value="no"/>	
+	</div>
+</form>
