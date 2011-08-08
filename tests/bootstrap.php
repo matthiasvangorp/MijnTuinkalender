@@ -17,3 +17,14 @@ set_include_path(implode(PATH_SEPARATOR, array(
 */
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
+$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
+                'basePath' => APPLICATION_PATH,
+                'namespace' => '',
+            ));
+
+
+$resourceLoader->addResourceType('loader', 'loaders/', 'My_Loader_');
+
+$autoLoader->pushAutoloader($resourceLoader);
+$autoLoader->pushAutoloader(new My_Loader_Autoloader_PhpThumb());
+$autoloader->registerNamespace('PhpThumb_');
