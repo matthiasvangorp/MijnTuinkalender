@@ -1,0 +1,23 @@
+<?php
+$this->title = "Planten";
+$this->headTitle($this->title);
+?>
+<p><a href="<?php echo $this->url(array('controller'=>'index',
+        'action'=>'add'));?>">Nieuwe plant toevoegen</a></p>
+<table>
+<tr>
+    <th>Naam</th>
+    <th>Beschrijving</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach($this->planten as $plant) : ?>
+<tr>
+    <td><?php echo $this->escape($plant->naam);?></td>
+    <td><?php echo $this->escape($plant->beschrijving);?></td>
+<td>
+    <a href="<?php echo $this->url(array('controller'=>'index',
+        'action'=>'edit', 'plantID'=>$plant->plantID));?>">Bewerken</a>
+    <a href="<?php echo $this->url(array('controller'=>'index',
+            'action'=>'delete', 'plantID'=>$plant->plantID));?>">Verwijderen</a>
+<?php endforeach; ?>
+</table>
