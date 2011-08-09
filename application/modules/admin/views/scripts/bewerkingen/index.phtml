@@ -1,0 +1,16 @@
+<?php
+$this->title = "Bewerkingen";
+$this->headTitle($this->title);
+?>
+
+<table>
+<tr>
+    <th>Bewerking</th>
+</tr>
+<?php foreach($this->bewerkingen as $bewerking) : ?>
+<tr>
+    <td><?php echo $this->escape($bewerking->bewerking);?></td>
+   </tr>
+<?php endforeach; ?>
+
+</table>

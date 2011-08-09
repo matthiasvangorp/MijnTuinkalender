@@ -19,5 +19,7 @@ $this->headTitle($this->title);
         'action'=>'edit', 'plantID'=>$plant->plantID));?>">Bewerken</a>
     <a href="<?php echo $this->url(array('controller'=>'index',
             'action'=>'delete', 'plantID'=>$plant->plantID));?>">Verwijderen</a>
+    <a href="<?php echo $this->url(array('controller'=>'plantbewerkingen',
+        'action'=>'add', 'plantID'=>$plant->plantID));?>">Plantbewerkingen toevoegen</a>
 <?php endforeach; ?>
 </table>

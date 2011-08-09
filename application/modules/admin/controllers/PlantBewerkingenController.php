@@ -17,7 +17,7 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     }
     
     public function addAction(){
-    	$form = new Application_Form_Plant();
+    	$form = new Application_Form_PlantBewerkingen();
     	$form->submit->setLabel('Toevoegen');
     	$this->view->form = $form;
     	
@@ -31,12 +31,6 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     			$begieten = $form->getValue('begieten');
     			$opbrengst = $form->getValue('opbrengst');
     			$afbeelding = $form->getValue('afbeelding');
-				//$afbeeldingLocatie = $form->file->getFileName();
-				echo "$afbeelding";
-
-				Zend_Debug::dump($afbeelding, '$afbeelding');
-				echo "done";
-				exit();
     			$planten = new Application_Model_DbTable_Planten();
     			$planten->addPlant($naam, $beschrijving, $kiemingsduur, $teeltduur, $begieten, $opbrengst, $afbeelding);
     			$this->_helper->redirector('index');

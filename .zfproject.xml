@@ -15,11 +15,14 @@
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Plant"/>
+        <formFile formName="PlantBewerkingen"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
         <dbTableDirectory>
           <dbTableFile dbTableName="Planten"/>
+          <dbTableFile dbTableName="Bewerkingen"/>
+          <dbTableFile dbTableName="PlantBewerkingen"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory>
