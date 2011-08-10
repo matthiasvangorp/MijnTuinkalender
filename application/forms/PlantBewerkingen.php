@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_PlantBewerkingen extends Zend_Form
+class Application_Form_PlantBewerkingen extends ZendX_JQuery_Form
 {
 
 public function __construct($options = null){
@@ -19,6 +19,13 @@ public function __construct($options = null){
 			'u',
 			'strike');
 		
+
+		$van = new ZendX_JQuery_Form_Element_DatePicker(
+                    'van',
+                    array('jQueryParams' => array('defaultDate' => '10.10.2007')));
+        $van->setJQueryParam('dateFormat', 'dd.mm.yy');
+        $van->setLabel('Van');
+		
 		$bewerkingen = new Application_Model_DbTable_Bewerkingen();
 		$bewerkingen = $bewerkingen->fetchAll();
         $plantID = new Zend_Form_Element_Hidden('plantID');
@@ -29,7 +36,8 @@ public function __construct($options = null){
         			$bewerkingID->addMultiOption($b->bewerkingID, $b->bewerking);
         	}
         	
-        	
+        //$van = new ZendX_JQuery_Form_Element_DatePicker('van', array('jQueryParams'));
+	
         $beschrijving = new Zend_Form_Element_Textarea('beschrijving');
         $beschrijving->setLabel('Beschrijving')
               ->setRequired(true)
@@ -47,7 +55,7 @@ public function __construct($options = null){
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
 		
-        $this->addElements(array($plantID, $bewerkingID, $beschrijving, $afbeelding, $submit)); }
+        $this->addElements(array($plantID, $bewerkingID, $van, $beschrijving, $afbeelding, $submit)); }
 		
 	}
 

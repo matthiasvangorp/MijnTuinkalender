@@ -16,7 +16,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    $this->bootstrap('frontController');
 	    $layout = Zend_Controller_Action_HelperBroker::addHelper(
 	        new Amz_Controller_Action_Helper_LayoutLoader());
+
 	}
+	
+	
+	public function _initViewHelpers(){
+
+		$view = new Zend_View();
+		$view->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+		//$view->jQuery()->addStyleSheet(APPLICATION_PATH."/../public/js/jquery/css/ui-lightness/jquery-ui-1.8.15.custom.css");
+		$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+		$viewRenderer->setView($view);
+		Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+	}
+	
 	
 	
 
