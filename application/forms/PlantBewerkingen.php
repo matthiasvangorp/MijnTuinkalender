@@ -21,16 +21,12 @@ public function __construct($options = null){
 		
 		$bewerkingen = new Application_Model_DbTable_Bewerkingen();
 		$bewerkingen = $bewerkingen->fetchAll();
-	
-		
         $plantID = new Zend_Form_Element_Hidden('plantID');
         $plantID->addFilter('Int');
-        $bewerkingID = new Zend_Form_Element_Hidden('bewerkingID');
-        $bewerkingID->addFilter('Int');
-        $bewerking = new Zend_Form_Element_Select('bewerking');
-        $bewerking->setLabel('Bewerking');
+        $bewerkingID = new Zend_Form_Element_Select('bewerking');
+        $bewerkingID->setLabel('Bewerking');
         	foreach($bewerkingen as $b){
-        			$bewerking->addMultiOption($b->bewerkingID, $b->bewerking);
+        			$bewerkingID->addMultiOption($b->bewerkingID, $b->bewerking);
         	}
         	
         	
@@ -51,7 +47,7 @@ public function __construct($options = null){
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
 		
-        $this->addElements(array($plantID, $bewerkingID, $bewerking, $beschrijving, $afbeelding, $submit)); }
+        $this->addElements(array($plantID, $bewerkingID, $beschrijving, $afbeelding, $submit)); }
 		
 	}
 

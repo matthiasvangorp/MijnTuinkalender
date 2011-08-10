@@ -17,6 +17,8 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     }
     
     public function addAction(){
+		$plantID = $this->getRequest()->getParam('plantID');
+		$formData = array( 'plantID'=> $plantID);
     	$form = new Application_Form_PlantBewerkingen();
     	$form->submit->setLabel('Toevoegen');
     	$this->view->form = $form;
@@ -24,20 +26,21 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     	if ($this->getRequest()->isPost()){
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)){
-    			$naam = $form->getValue('naam');
+    			$plantID = $form->getValue('plantID');
+    			$bewerkingID = $form->getValue('bewerking');
     			$beschrijving = $form->getValue('beschrijving');
-    			$kiemingsduur = $form->getValue('kiemingsduur');
-    			$teeltduur = $form->getValue('teeltduur');
-    			$begieten = $form->getValue('begieten');
-    			$opbrengst = $form->getValue('opbrengst');
     			$afbeelding = $form->getValue('afbeelding');
-    			$planten = new Application_Model_DbTable_Planten();
-    			$planten->addPlant($naam, $beschrijving, $kiemingsduur, $teeltduur, $begieten, $opbrengst, $afbeelding);
+    			$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
+    			$plantenBewerkingen->addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding);
     			$this->_helper->redirector('index');
     		}
     		else {
     			$form->populate($formData);
     		}
+    	
+    	}
+    	else {
+    		$form->populate($formData);
     	}
     }
     
