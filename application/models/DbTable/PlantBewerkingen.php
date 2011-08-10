@@ -8,7 +8,7 @@ class Application_Model_DbTable_PlantBewerkingen extends Zend_Db_Table_Abstract
     public function getPlantBewerking($plantID, $bewerkingID){
     	$plantID = (int)$plantID;
     	$bewerkingID = (int)$bewerkingID;
-    	$row = $this-fetchRow('plantID = '.$plantID.' and bewerkingID = ' .$bewerkingID);
+    	$row = $this->fetchRow('plantID = '.$plantID.' and bewerkingID = ' .$bewerkingID);
     	if (!$row){
 			throw new Exception("Rij $row niet gevonden");
 		}   
@@ -33,7 +33,7 @@ class Application_Model_DbTable_PlantBewerkingen extends Zend_Db_Table_Abstract
     public function deletePlantBewerking($plantID, $bewerkingID){
     	$plantID = (int)$plantID;
     	$bewerkingID = (int)$bewerkingID;
-    	$this->delete($data,'plantID = '.$plantID.' and bewerkingID = ' .$bewerkingID );
+    	$this->delete('plantID = '.$plantID.' and bewerkingID = ' .$bewerkingID );
     }
 
 }
