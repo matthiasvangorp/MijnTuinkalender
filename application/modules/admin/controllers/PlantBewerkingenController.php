@@ -16,7 +16,10 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
         
     }
     
+    
     public function addAction(){
+    	$date_format = "YYYY-MM-dd"; 
+    	$date_functions = new Custom_dateFunctions();
 		$plantID = $this->getRequest()->getParam('plantID');
 		$formData = array( 'plantID'=> $plantID);
     	$form = new Application_Form_PlantBewerkingen();
@@ -30,8 +33,18 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     			$bewerkingID = $form->getValue('bewerking');
     			$beschrijving = $form->getValue('beschrijving');
     			$afbeelding = $form->getValue('afbeelding');
+    			
+    			$van = $form->getValue('van');
+    			//echo "van : $van<br/>";
+    			$van = $date_functions->dateToMysql($van);
+    			//echo "van : $van<br/>";
+    			//$van->toString($date_format);
+    			//echo "van : $van <br/>";
+    			//die();
+    			$tot = $form->getValue('tot');
+    			$tot = $date_functions->dateToMysql($tot);
     			$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
-    			$plantenBewerkingen->addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding);
+    			$plantenBewerkingen->addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding, $van, $tot);
     			$this->_helper->redirector('index');
     		}
     		else {

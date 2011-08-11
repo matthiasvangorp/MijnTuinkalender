@@ -15,11 +15,11 @@ class Application_Model_DbTable_PlantBewerkingen extends Zend_Db_Table_Abstract
 		return $row->toArray(); 	
     }
     
-    public function addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding){
+    public function addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding, $van, $tot){
     	$plantID = (int)$plantID;
     	$bewerkingID = (int)$bewerkingID;
-		$data = array('plantID'=>$plantID, 'bewerkingID'=>$bewerkingID, 'beschrijving' =>$beschrijving, 
-					'afbeelding' => $afbeelding);
+		$data = array('plantID'=>$plantID, 'bewerkingID'=>$bewerkingID,  'beschrijving' =>$beschrijving,
+					'afbeelding' => $afbeelding, 'van'=>$van, 'tot'=>$tot);
 		$this->insert($data);    
     }
 

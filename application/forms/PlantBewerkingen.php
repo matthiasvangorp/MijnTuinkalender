@@ -21,12 +21,14 @@ public function __construct($options = null){
 		
 
 		$van = new ZendX_JQuery_Form_Element_DatePicker('van');
-        $van->setJQueryParam('dateFormat', 'dd/mm');
-        $van->setLabel('Van');
+        $van->setJQueryParam('dateFormat', 'dd/mm/yy');
+        $van->setLabel('Van')
+        	->setRequired();
         
  		$tot = new ZendX_JQuery_Form_Element_DatePicker('tot');
-        $tot->setJQueryParam('dateFormat', 'dd/mm');
-        $tot->setLabel('Tot');
+        $tot->setJQueryParam('dateFormat', 'dd/mm/yy');
+        $tot->setLabel('Tot')
+        		->setRequired();
 		
 		$bewerkingen = new Application_Model_DbTable_Bewerkingen();
 		$bewerkingen = $bewerkingen->fetchAll();
