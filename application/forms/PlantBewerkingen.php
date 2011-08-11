@@ -20,11 +20,13 @@ public function __construct($options = null){
 			'strike');
 		
 
-		$van = new ZendX_JQuery_Form_Element_DatePicker(
-                    'van',
-                    array('jQueryParams' => array('defaultDate' => '10.10.2007')));
-        $van->setJQueryParam('dateFormat', 'dd.mm.yy');
+		$van = new ZendX_JQuery_Form_Element_DatePicker('van');
+        $van->setJQueryParam('dateFormat', 'dd/mm');
         $van->setLabel('Van');
+        
+ 		$tot = new ZendX_JQuery_Form_Element_DatePicker('tot');
+        $tot->setJQueryParam('dateFormat', 'dd/mm');
+        $tot->setLabel('Tot');
 		
 		$bewerkingen = new Application_Model_DbTable_Bewerkingen();
 		$bewerkingen = $bewerkingen->fetchAll();
@@ -55,7 +57,7 @@ public function __construct($options = null){
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
 		
-        $this->addElements(array($plantID, $bewerkingID, $van, $beschrijving, $afbeelding, $submit)); }
+        $this->addElements(array($plantID, $bewerkingID, $van, $tot, $beschrijving, $afbeelding, $submit)); }
 		
 	}
 
