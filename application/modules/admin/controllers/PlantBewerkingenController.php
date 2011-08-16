@@ -18,8 +18,7 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     
     
     public function addAction(){
-    	$date_format = "YYYY-MM-dd"; 
-    	$date_functions = new Custom_dateFunctions();
+    	$custom_functions = new Custom_customFunctions();
 		$plantID = $this->getRequest()->getParam('plantID');
 		$formData = array( 'plantID'=> $plantID);
     	$form = new Application_Form_PlantBewerkingen();
@@ -27,25 +26,28 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     	$this->view->form = $form;
     	
     	if ($this->getRequest()->isPost()){
+    		//rename image 
+		    $originalFilename = pathinfo($form->afbeelding->getFileName());
+		    $newFilename = 'file-' . uniqid() . '.' . $originalFilename['extension'];
+		    $form->afbeelding->addFilter('Rename', $newFilename);
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)){
+
+    			
+    			
     			$plantID = $form->getValue('plantID');
     			$bewerkingID = $form->getValue('bewerking');
     			$beschrijving = $form->getValue('beschrijving');
     			$afbeelding = $form->getValue('afbeelding');
-    			
+						
     			$van = $form->getValue('van');
-    			//echo "van : $van<br/>";
-    			$van = $date_functions->dateToMysql($van);
-    			//echo "van : $van<br/>";
-    			//$van->toString($date_format);
-    			//echo "van : $van <br/>";
-    			//die();
+    			$van = $custom_functions->dateToMysql($van);
     			$tot = $form->getValue('tot');
-    			$tot = $date_functions->dateToMysql($tot);
+    			$tot = $custom_functions->dateToMysql($tot);
     			$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
     			$plantenBewerkingen->addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding, $van, $tot);
-    			$this->_helper->redirector('index');
+    			 
+    			$form->reset();
     		}
     		else {
     			$form->populate($formData);
@@ -58,24 +60,39 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     }
     
     public function editAction($plantID){
-    	$form = new Application_Form_Plant();
+    	$date_functions = new Custom_customFunctions();
+    	$form = new Application_Form_PlantBewerkingen();
     	$form->submit->setLabel('Opslaan');
     	$this->view->form = $form;
     	
     	if ($this->getRequest()->isPost()){
+    		
+     		//rename image 
+		    $originalFilename = pathinfo($form->afbeelding->getFileName());
+		    $newFilename = 'file-' . uniqid() . '.' . $originalFilename['extension'];
+		    $form->afbeelding->addFilter('Rename', $newFilename);
+		    
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)){
-    			$plantID = $form->getValue('plantID');
-      			$naam = $form->getValue('naam');
-    			$beschrijving = $form->getValue('beschrijving');
-    			$kiemingsduur = $form->getValue('kiemingsduur');
-    			$teeltduur = $form->getValue('teeltduur');
-    			$begieten = $form->getValue('begieten');
-    			$opbrengst = $form->getValue('opbrengst');
-    			$afbeelding = $form->getValue('afbeelding');
-    			$planten = new Application_Model_DbTable_Planten();
-    			$planten->updatePlant($plantID, $naam, $beschrijving, $kiemingsduur, $teeltduur, $begieten, $opbrengst, $afbeelding);
+    			$currentMicroTime = $date_functions->getMicroTime();
+    			$filename = $currentMicroTime;
+    			$FullFilename = 'images/'.$filename;
+    			echo "filename : $FullFilename";
+    			die();
+    			$filterRename = new Zend_Filter_File_Rename(array('target' => $FullFilename, 'overwrite'=>TRUE));
     			
+    			
+    			$plantID = $form->getValue('plantID');
+      			$bewerkingID = $form->getValue('bewerkingID');
+    			$beschrijving = $form->getValue('beschrijving');
+    			$afbeelding = $form->getValue('afbeelding');
+    			//rename image
+    			$van = $form->getValue('van');
+    			$van = $date_functions->dateToMysql($van);
+    			$tot = $form->getValue('tot');
+    			$tot = $date_functions->dateToMysql($tot);
+    			$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
+    			$plantenBewerkingen->updatePlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding, $van ,$tot);
     			$this->_helper->redirector('index');
     			
     		}
@@ -86,10 +103,11 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     	}
     	else {
     		$plantID = $this->_getParam('plantID', 0);
-    		if ($plantID >0){
-    			$planten = new Application_Model_DbTable_Planten();
-    			 $this->view->planten = $planten->getPlant($plantID);
-    			$form->populate($planten->getPlant($plantID));
+    		$bewerkingID = $this->_getParam('bewerkingID', 0);
+    		if ($plantID >0 && $bewerkingID > 0){
+    			$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
+    			$this->view->plantenBewerkingen = $plantenBewerkingen->getPlantBewerking($plantID, $bewerkingID);
+    			$form->populate($plantenBewerkingen->getPlantBewerking($plantID, $bewerkingID));
     		}
     	}
     	

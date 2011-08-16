@@ -23,10 +23,10 @@ class Application_Model_DbTable_PlantBewerkingen extends Zend_Db_Table_Abstract
 		$this->insert($data);    
     }
 
-    public function updatePlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding){
+    public function updatePlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding, $van, $tot){
     	$plantID = (int)$plantID;
     	$bewerkingID =(int)$bewerkingID;
- 		$data = array('beschrijving' =>$beschrijving, 'afbeelding' => $afbeelding);
+ 		$data = array('beschrijving' =>$beschrijving, 'afbeelding' => $afbeelding, 'van'=>$van, 'tot'=>$tot);
  		$this->update($data,'plantID = '.$plantID.' and bewerkingID = ' .$bewerkingID );  		  	
     }
     
