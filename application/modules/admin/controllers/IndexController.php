@@ -22,6 +22,11 @@ class Admin_IndexController extends Zend_Controller_Action
     	$this->view->form = $form;
     	
     	if ($this->getRequest()->isPost()){
+     		//rename image 
+		    $originalFilename = pathinfo($form->afbeelding->getFileName());
+		    $newFilename = 'file-' . uniqid() . '.' . $originalFilename['extension'];
+		    $form->afbeelding->addFilter('Rename', $newFilename);
+		    
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)){
     			$naam = $form->getValue('naam');
@@ -47,6 +52,11 @@ class Admin_IndexController extends Zend_Controller_Action
     	$this->view->form = $form;
     	
     	if ($this->getRequest()->isPost()){
+       		//rename image 
+		    $originalFilename = pathinfo($form->afbeelding->getFileName());
+		    $newFilename = 'file-' . uniqid() . '.' . $originalFilename['extension'];
+		    $form->afbeelding->addFilter('Rename', $newFilename);
+		    
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)){
     			$plantID = $form->getValue('plantID');
