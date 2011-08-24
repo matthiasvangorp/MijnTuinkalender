@@ -20,9 +20,13 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     public function addAction(){
     	$custom_functions = new Custom_customFunctions();
 		$plantID = $this->getRequest()->getParam('plantID');
+		$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
+		
+		$exisitingBewerkingen = $plantenBewerkingen->GetPlantBewerkingenByPlantID($plantID);
 		$formData = array( 'plantID'=> $plantID);
     	$form = new Application_Form_PlantBewerkingen();
     	$form->submit->setLabel('Toevoegen');
+    	$this->view->assign("existingBewerkingen", $exisitingBewerkingen);
     	$this->view->form = $form;
     	
     	if ($this->getRequest()->isPost()){
@@ -44,7 +48,7 @@ class Admin_PlantBewerkingenController extends Zend_Controller_Action
     			$van = $custom_functions->dateToMysql($van);
     			$tot = $form->getValue('tot');
     			$tot = $custom_functions->dateToMysql($tot);
-    			$plantenBewerkingen = new Application_Model_DbTable_PlantBewerkingen();
+    			
     			$plantenBewerkingen->addPlantBewerking($plantID, $bewerkingID, $beschrijving, $afbeelding, $van, $tot);
     			 
     			$form->reset();

@@ -2,13 +2,22 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+	
+	
 	protected function _initAppAutoload()
 	{
+		$db = new Zend_Db_Adapter_Pdo_Mysql(array( 'host' => '127.0.0.1', 'username' => 'root', 'password' => 'root', 'dbname' => 'tuinkalender'));
+
+		Zend_Registry::set('database', $db);
+
+
 	    $autoloader = new Zend_Application_Module_Autoloader(array(
 	        'namespace' => 'App',
 	        'basePath' => dirname(__FILE__),
 	    ));
 	    return $autoloader;
+	    
+	   
 	}
 	
 	protected function _initLayoutHelper()
