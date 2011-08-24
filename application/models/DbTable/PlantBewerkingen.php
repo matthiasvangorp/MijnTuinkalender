@@ -40,9 +40,7 @@ class Application_Model_DbTable_PlantBewerkingen extends Zend_Db_Table_Abstract
     public function GetPlantBewerkingenByPlantID($plantID, $inornotin = 'in'){
 		$db = Zend_Db_Table_Abstract::getDefaultAdapter();
 		$sql = sprintf("select * from bewerkingen where bewerkingID $inornotin (select bewerkingID from plantbewerkingen where plantID = %s)", $plantID);
-		//echo "sql : $sql <br/>";
 		$results = $db->fetchAll($sql);
-		print_r($results);
 		return $results;
     }
 
