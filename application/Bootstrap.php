@@ -9,6 +9,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$db = new Zend_Db_Adapter_Pdo_Mysql(array( 'host' => '127.0.0.1', 'username' => 'root', 'password' => 'root', 'dbname' => 'tuinkalender'));
 
 		Zend_Registry::set('database', $db);
+		
+		$translator = new Zend_Translate(
+		    'array',
+		    APPLICATION_PATH.'/../public/resources/languages/',
+		    'nl',
+		    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
+		);
+		Zend_Validate_Abstract::setDefaultTranslator($translator);
+		Zend_Registry::set('translator', $translator);
 
 
 	    $autoloader = new Zend_Application_Module_Autoloader(array(
@@ -38,6 +47,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$viewRenderer->setView($view);
 		Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 	}
+	
+
+
 	
 	
 	

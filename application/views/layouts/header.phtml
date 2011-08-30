@@ -2,9 +2,8 @@
 	<header><!-- header -->
 		<h1><a href="#">Mijn Tuinkalender</a></h1>
 		<div id="login">
-		<?php echo $this->loginForm;?>
-		
-		</form>
+			<?php echo $this->loginForm;?>
+			<a href="<?= $this->url(array('controller'=>'index', 'action'=>'registration')) ;?>" >Registreren</a>
 		</div>
 		<img src="Mijntuinkalender/public/images/headerimg.png" width="940" height="200" alt=""><!-- header image -->
 	</header><!-- end of header -->

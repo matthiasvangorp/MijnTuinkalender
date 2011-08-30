@@ -1,9 +1,9 @@
 <?php
 class Application_Form_LoginForm extends Zend_Form{
 	public function init(){
-		$username = $this->addElement('text', 'username', array('filters' =>array('StringTrim', 'StringToLower'), 'validators' =>
-		array('Alpha', array('StringLength', false, array(3,20)), ), 'required'=> TRUE, 'label' => 'E-mail:'));
-		
+		$email = $this->addElement('text', 'email', array('filters' =>array('StringTrim', 'StringToLower'), 'validators' =>
+		array('Alpha', array('StringLength', false, array(3,20)), ), 'required'=> TRUE, 'label' => 'Email:'));
+	
 		$password = $this->addElement('password', 'password', array('filters' => array('StringTrim'),
 			'validators'=>array('Alnum', array('StringLength', false, array (6,20)),
 		),

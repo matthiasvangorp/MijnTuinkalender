@@ -13,6 +13,29 @@ class IndexController extends Zend_Controller_Action
         // action body
         $this->view->loginForm = new Application_Form_LoginForm();
     }
+    
+    public function registrationAction()
+    {
+    	$form = new Application_Form_RegistrationForm();
+    	$form->setDefaultTranslator(Zend_Registry::get('translator'));
+    	
+    	
+    	$this->layout = new Application_Form_RegistrationForm();
+    	$this->view->registrationForm = $form;
+       	if ($this->getRequest()->isPost()){		    
+    		$formData = $this->getRequest()->getPost();
+    		if ($form->isValid($formData)){
+    			$firstname = $form->getValue('firstname');
+    			$lastname = $form->getValue('lastname');
+    			$email = $form->getValue('email');
+    			$password = $form->getValue('password');
+				$user = new Application_Model_DbTable_User();
+				$user->addUser($firstname, $lastname, $email, $password, 'N');
+    			$this->_helper->redirector('index');
+    		}   
+        }	
+    	
+    }
 
 
 }

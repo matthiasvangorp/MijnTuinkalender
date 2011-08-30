@@ -8,6 +8,8 @@
     <?php echo $this->headStyle() ?>
     <?php echo $this->headScript() ?>
     <?php echo $this->headLink()->appendStylesheet('css/styles.css');?>
+    <?php echo $this->headLink()->appendStylesheet('../css/styles.css');?>
+    
     <base href="/" />
 </head>
 
@@ -15,35 +17,7 @@
     <?php echo $this->render('header.phtml') ?>
 	<section id="main"><!-- #main content and sidebar area -->
 			<section id="content"><!-- #content -->
-			
-        		<article>
-							<h2><a href="#">Titel</a></h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. <a href="#">Duis sagittis ipsum</a>. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.  Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Duo partem graeco repudiare ne, vix cu graeci nostrud blandit. Agam graecis omnesque usu ut, veniam commune ne sit, vide lucilius complectitur at ius.</p> 
-						</article>
-						
-						<article>
-						<h2><a href="#">Title of 3-Column Quick Information Section</a></h2>
-						  <div class="col1">
-						  <img src="Mijntuinkalender/public/images/l1.png" alt="" />
-              <p>Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.</p>
-              </div>
-
-						  <div class="col2">
-						  <img src="Mijntuinkalender/public/images/l2.png" alt="" />
-              <p>Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.</p>
-              </div>
-
-						  <div class="col3">
-						  <img src="Mijntuinkalender/public/images/l3.png" alt="" />
-              <p>Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.</p>
-              </div>
-						</article>
-						
-        		<article>
-							<h2><a href="#">Second Section or Article Title</a></h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Usu pericula argumentum repudiandae ea, ut vis deserunt oportere, assum nominavi percipitur ei ius. Nam timeam atomorum philosophia te, ut eum amet laoreet pertinax, an duo error aperiri reformidans. Et alii quas partiendo mei, wisi quaestio convenire et vix.</p>
-						</article>
-						
+				<?php echo $this->layout()->content;?>			
 			</section><!-- end of #content -->
 
 		<aside id="sidebar"><!-- sidebar -->
