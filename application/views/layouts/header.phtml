@@ -1,10 +1,23 @@
 	<div id="wrapper"><!-- #wrapper -->
 	<header><!-- header -->
-		<h1><a href="#">Mijn Tuinkalender</a></h1>
-		<div id="login">
-			<?php echo $this->loginForm;?>
-			<a href="<?= $this->url(array('controller'=>'index', 'action'=>'registration')) ;?>" >Registreren</a>
-		</div>
+		<h1><a href="Mijntuinkalender/public/">Mijn Tuinkalender</a></h1>
+		<?php 
+			if ($this->loggedInAs()){
+		?>	
+			<div id="loggedin">
+				<?php echo $this->loggedInAs();?>
+			</div>
+		<?php 
+		}
+			else {
+		?>
+			<div id="login">
+				<?php echo $this->loginForm;?>
+				<a href="<?= $this->url(array('controller'=>'index', 'action'=>'registration')) ;?>" >Registreren</a>
+			</div>
+		<?php 
+			}
+		?>
 		<img src="Mijntuinkalender/public/images/headerimg.png" width="940" height="200" alt=""><!-- header image -->
 	</header><!-- end of header -->
 	

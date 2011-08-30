@@ -8,16 +8,11 @@ class IndexController extends Zend_Controller_Action
         /* Initialize action controller here */
     }
 
-    public function indexAction()
-    {
-        // action body
-        $this->view->loginForm = new Application_Form_Login();
-    }
     
     public function registrationAction()
     {
     	$form = new Application_Form_Registration();
-    	$form->setDefaultTranslator(Zend_Registry::get('translator'));
+    	//$form->setDefaultTranslator(Zend_Registry::get('translator'));
     	
     	
     	$this->layout = new Application_Form_RegistratioN();
@@ -36,12 +31,58 @@ class IndexController extends Zend_Controller_Action
         }	
     	
     }
+
+    public function indexAction()
+    {
+        // action body
+        $form = new Application_Form_Login();
+        $this->view->loginForm = $form;
+    	if ($this->getRequest()->isPost()){	
+   			$post = $this->getRequest()->getPost(); 
+   			//print_r($post);
+   			//die();
+   			if ($post['login'] == 'Aanmelden'){
+				if ($this->_processLogin($post)){
+					$this->_helper->redirector('index', 'index');
+				}
+   			}
+   		}	       
+    }
     
-    public function loginAction(){
-   		if ($this->getRequest()->isPost()){	
-   			
-   		}	    
+    public function logoutAction()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        $this->_helper->redirector('index'); // back to login page
+    }
+    
+    
+    protected function _processLogin($values)
+    {
+        // Get our authentication adapter and check credentials
+        $adapter = $this->_getAuthAdapter();
+        $adapter->setIdentity($values['email']); 
+        $adapter->setCredential($values['password']);
+
+        $auth = Zend_Auth::getInstance();
+        $result = $auth->authenticate($adapter);
+        if ($result->isValid()) {
+            $user = $adapter->getResultRowObject();
+            $auth->getStorage()->write($user);
+            return true;
+        }
+        return false;
+    }
+    
+    protected function _getAuthAdapter(){
+    	$dbAdapter = Zend_Db_Table::getDefaultAdapter();
+    	$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
     	
+    	$authAdapter->setTableName('user')
+    		->setIdentityColumn('email')
+    		->setCredentialColumn('password')
+    		->setCredentialTreatment( 'MD5(?)');
+    	
+    	return $authAdapter;
     }
 
 
