@@ -6,7 +6,7 @@ class Zend_View_Helper_LoggedInAs extends Zend_View_Helper_Abstract{
 			$firstname = $auth->getIdentity()->firstname;
 			 $logoutUrl = $this->view->url(array('controller'=>'index',
                 'action'=>'logout'), null, true);
-			return 'Welkom, '.$firstname.'<br/> <a href="'.$logoutUrl.'">Afmelden</a>';
+			return 'Welkom, '.ucfirst($firstname).'<br/> <a href="'.$logoutUrl.'">Afmelden</a>';
 		}
 		else return FALSE;	
 	}
