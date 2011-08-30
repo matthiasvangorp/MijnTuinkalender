@@ -1,5 +1,5 @@
 <?php
-class Application_Form_LoginForm extends Zend_Form{
+class Application_Form_Login extends Zend_Form{
 	public function init(){
 		$email = $this->addElement('text', 'email', array('filters' =>array('StringTrim', 'StringToLower'), 'validators' =>
 		array('Alpha', array('StringLength', false, array(3,20)), ), 'required'=> TRUE, 'label' => 'Email:'));

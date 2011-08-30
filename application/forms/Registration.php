@@ -1,5 +1,5 @@
 <?php
-class Application_Form_RegistrationForm extends Zend_Form{
+class Application_Form_Registration extends Zend_Form{
 	public function init(){
 		
 		//$validator = new Zend_Validate_Db_NoRecordExists();

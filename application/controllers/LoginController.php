@@ -1,7 +1,7 @@
 <?php
 class LoginController extends Zend_Controller_Action{
 	public function getForm(){
-		return new LoginForm(array('action'=>'/login/process', 'method'=>'post'));
+		return new Login(array('action'=>'/login/process', 'method'=>'post'));
 	}
 	
 	public function getAuthAdapter(array $params){
