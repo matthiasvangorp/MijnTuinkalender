@@ -28,10 +28,10 @@ class IndexController extends Zend_Controller_Action
     			$firstname = $form->getValue('firstname');
     			$lastname = $form->getValue('lastname');
     			$email = $form->getValue('email');
-    			$password = $form->getValue('password');
+    			$password = md5($form->getValue('password'));
 				$user = new Application_Model_DbTable_User();
 				$user->addUser($firstname, $lastname, $email, $password, 'N');
-    			$this->_helper->redirector('index');
+    			//$this->_helper->redirector('controller'=>'index', 'action'=>'registration');
     		}   
         }	
     	
