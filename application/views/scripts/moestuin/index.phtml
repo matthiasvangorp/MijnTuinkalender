@@ -1,0 +1,15 @@
+<H1>Overzicht planten</H1>
+
+<table>
+<tr>
+    <th>Naam</th>
+</tr>
+<?php foreach($this->planten as $plant) : ?>
+<tr>
+    <td>
+    	<a href="<?= $this->url(array('controller'=>'moestuin', 'action'=>'detail', 'plantID'=>$plant->plantID)) ;?>">
+    		<?php echo $this->escape($plant->naam);?>
+    	</a>
+    </td>
+<?php endforeach; ?>
+</table>

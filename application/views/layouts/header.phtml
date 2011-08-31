@@ -24,11 +24,13 @@
 	<nav><!-- top nav -->
 		<div class="menu">
 			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Moestuin</a></li>
+				<li><a href="<?= $this->url(array('controller'=>'index', 'action'=>'index')) ;?>">Home</a></li>
+				<li><a href="<?= $this->url(array('controller'=>'moestuin', 'action'=>'index')) ;?>">Moestuin</a></li>
 				<li><a href="#">Kruidentuin</a></li>
 				<li><a href="#">Forum</a></li>
-				<li><a href="#"></a></li>
+				<?php if ($this->loggedInAs()) {?>
+					<li><a href="#">Mijn Tuin</a></li>
+				<?php }?>
 				<li><a href="#"></a></li>
 			</ul>
 		</div>

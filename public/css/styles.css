@@ -226,3 +226,8 @@ text-align: right;
 font-size: 11px;
 padding-right: 20px;
 }
+
+#mainimage{
+	float:right;
+	padding-left:20px;
+}

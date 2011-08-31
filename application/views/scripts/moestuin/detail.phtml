@@ -1,0 +1,12 @@
+<H1><?php echo ucfirst($this->plant['naam']);?></H1>
+<div id="descriptionandpicture">
+<p>
+<?
+$afbeelding = $this->baseUrl().'/images/'.$this->plant['afbeelding'];
+?>	
+	
+	<img id="mainimage" style="right;" src="../MijnTuinkalender/library/phpThumb/phpthumb.php?src=<?php echo $afbeelding;?>&w=250&f=jpg>"/>
+			<?php echo $this->plant['beschrijving'];?>
+	
+</p>
+</div>
